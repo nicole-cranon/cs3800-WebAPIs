@@ -1,0 +1,98 @@
+Nicole Cranon
+CS 3800-Web APIs, Spring 2015
+Assignment One
+REST Request
+
+Part I - REST Request
+https://www.googleapis.com/books/v1/volumes?q=turing
+
+Request Headers:
+-GET https://www.googleapis.com/books/v1/volumes?q=turing HTTP/1.1
+
+The first line of the headers contains the type of http request-response method we are performing against the server. In this case we are performing a GET, requesting books from the Google API host with "Turing" in the title, and the request message is of http version HTTP/1.1.
+
+-Accept-Encoding: gzip,deflate
+
+The Accept-Encoding header outlines the content coding formats that my system will accept. Here my system accepts the gzip and deflate encodings
+
+-Host: www.googleapis.com
+
+This header communicates the host name and optionally the port that my resource request is being sent to, which is GoogleApis.
+
+-Connection: Keep-Alive
+
+The Connection header allows for the requesting system to select options for the particular connection. In this situation the option selected is to keep the connection alive for multiple http requests-responses as opposed to requiring a new connection for each request-response.
+
+-User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
+
+The User-Agent header gives information about the requesting systems configurations. This information can be used to track statistics about the type of systems hitting a server. In this instance, my system has a product token of Apache-HttpClient/4.1.1 (java 1.5).
+
+
+Response Headers:
+-HTTP/1.1 200 OK
+
+The first line of the response contains the http-version, and the status code of the response. Here the http-version is HTTP/1 and the response code is 200, which means a successful connection has been made.
+
+-Expires: Wed, 04 Feb 2015 19:16:21 GMT
+
+This field expresses the lifetime of the response, although it does not indicate that the resource will have changed by the expiration, only that the response must be revalidated after the expiration time.
+
+-Date: Wed, 04 Feb 2015 19:16:21 GMT
+
+The Date header indicates the date of the original request.
+
+-Cache-Control: private, max-age=0, must-revalidate, no-transform
+
+This header is used to provide directives that must be obeyed by all caching mechanisms. In this case the options private, max-age=0, must-revalidate and no-transform are applied. The private option means that the response cannot be cached in a shared cache; the max-age means that the response is not stale; the must-revalidate means that the cached version of a response may not be used after the expiration date; the no-transform means that no intermediate cache or proxies may change the header.
+
+-ETag: "-roYZe-KGC8fMhY8_FAC-zdHGwU/d3PwKj7tSCpQJsb8GWNCHatUmFc"
+
+The ETag header contains a hashed value of the current response. This can be used to validate cache.
+
+-Vary: Origin
+-Vary: X-Origin
+
+The Vary header indicates the set of request-heaer fields that fully determines if a cache is permitted to usethe response to reply to a subsequent request without revalidation. The Origin option seems to prevent caching, I was not able to find information about the X-Origin option.
+
+
+-Content-Type: application/json; charset=UTF-8
+
+The Content-Type header indicates the type of media contained in the body of the response. In this case the type is an application transmitted in JSON format.
+
+-X-Content-Type-Options: nosniff
+
+I was not able to identify this as a standard header, but from what I have found the X-Content-Type-Options header is used to disallow content sniffing of the response which can introduce security issues.
+
+-X-Frame-Options: SAMEORIGIN
+
+The X-Frame-Options header is used to indicate whether or not a browser should be allowed to render a page in a <frame>, <iframe>, or <object>. Sites can use this to avoid clickjacking attacks, by ensuring that their content is not embedded into other sites. Here the option is set to SAMEORIGIN meaning that the page can only be displayed in a frame on the same origin a the page itself.
+
+-X-XSS-Protection: 1; mode=block
+
+This header is used to configure protections against cross-site-scripting. At present only a few browsers support the header. The option 1; mode=block Enables XSS Protections and instructs the user agent to block the response in the event that script has been inserted from the user-input.
+
+-Content-Length: 28656
+
+This header is used to indicate the size of the body of the response, represented in Octets. In this case the response body size is 28 656.
+
+-Server: GSE
+
+The Server header is used to indicate the software the origin server is using to handle the request. It can contain multiple product tokens, similar to the User-Agent header in the request. Here the responding server is some a Google based server.
+
+-Alternate-Protocol: 443:quic,p=0.02
+
+This is a header  used to mark requests that could have been served via SPDY, a networking protocol largely developed by Google for transporting web content. Here the port and protocol is 443, quic,p=0.02. When the client receives an Alternate-Protocol Header it should attempt to piggyback future requests over SPDY using the specified port.
+
+Sources:
+
+https://developer.mozilla.org/en-US/docs/Web/HTTP/X-Frame-Options
+
+https://www.veracode.com/blog/2014/03/guidelines-for-setting-security-headers
+
+https://developer.mozilla.org/en-US/docs/Web/HTTP/X-Frame-Options
+
+https://www.owasp.org/index.php/List_of_useful_HTTP_headers
+
+http://www.chromium.org/spdy/spdy-protocol/spdy-protocol-draft2
+
+http://websystemsengineering.blogspot.com/2011/03/http-headers-server.html
