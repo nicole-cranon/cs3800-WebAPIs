@@ -63,7 +63,7 @@ The Content-Encoding header is used to define the type of content that is contai
 
 Vary: Accept-Encoding
 
-I am somewhat confused about the meaning of the Vary header. What I have found indicates that it indicates more about cacheing settings. Here my guess is that it is telling the user agent to store the content using gzip compression. But really I have no idea.
+I am somewhat confused about the meaning of the Vary header. What I have found indicates that it tells more about cacheing settings. Here my guess is that it is telling the user agent to store the content using gzip compression. But really I have no idea.
 
 Server: Microsoft-IIS/7.0
 
