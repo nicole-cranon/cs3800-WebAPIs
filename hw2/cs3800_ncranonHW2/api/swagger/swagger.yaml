@@ -1,0 +1,139 @@
+# modified by: nicole cranon <nicole.cranon@ucdenver.edu>
+
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Server that accepts GET, POST, PUT and DELETE requests.
+# during dev, should point to your local machine
+host: localhost
+# basePath prefixes all resource paths 
+basePath: /
+# 
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+x-a127-config: {}
+x-a127-services: {}
+paths:
+  /gets:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: ncranonHW2
+    x-a127-apply: {}
+    get:
+      description: Returns the name and value of the request query
+      # used as the method name of the controller
+      operationId: qryStr
+      parameters:
+        - name: name
+          in: query
+          description: The query of the request
+          required: false
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/RequestQueryResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /posts:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: ncranonHW2
+    x-a127-apply: {}
+    post:
+      description: Returns the name and value of the request query
+      # used as the method name of the controller
+      operationId: qryStr
+      parameters:
+        - name: name
+          in: query
+          description: The query of the request
+          required: false
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/RequestQueryResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /puts:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: ncranonHW2
+    x-a127-apply: {}
+    put:
+      description: Returns the name and value of the request query
+      # used as the method name of the controller
+      operationId: qryStr
+      parameters:
+        - name: name
+          in: query
+          description: The query of the request
+          required: false
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/RequestQueryResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"  
+  /deletes:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: ncranonHW2
+    x-a127-apply: {}
+    delete:
+      description: Returns the name and value of the request query
+      # used as the method name of the controller
+      operationId: qryStr
+      parameters:
+        - name: name
+          in: query
+          description: The query of the request
+          required: false
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/RequestQueryResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+# complex objects have schema definitions
+definitions:
+  RequestQueryResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  ErrorResponse:
+    required:
+      - message
+    properties:
+      message: 
+        type: string
+        

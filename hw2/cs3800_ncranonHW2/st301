@@ -1,0 +1,1 @@
+"Headers:  { 'user-agent': 'curl/7.37.1',\n  host: '127.0.0.1:10010',\n  accept: '*/*' }  Query:  { QUERY NAME: 'VALUE' } -> { qry: 'Q' }"
