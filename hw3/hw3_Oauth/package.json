@@ -1,5 +1,5 @@
 {
-  "name": "cs3800_ncranonHW3",
+  "name": "hw3_Oauth",
   "version": "0.0.1",
   "private": "true",
   "description": "My new Apigee 127 Project",
@@ -22,8 +22,7 @@
     "volos-spikearrest-memory": "",
     "volos-oauth-redis": "",
     "volos-oauth-apigee": "",
-    "github":"",
-    "octonode":""
+    "github": ""
   },
   "devDependencies": {
     "should": "4.4.x",
@@ -33,8 +32,8 @@
     "start": "node app.js"
   },
   "api": {
-    "name": "cs3800_ncranonHW3",
-    "basePath": "/cs3800_ncranonHW3",
+    "name": "hw3_Oauth",
+    "basePath": "/hw3_Oauth",
     "docsPath": "/docs",
     "main": "app.js"
   }
