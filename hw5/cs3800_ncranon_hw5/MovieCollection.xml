@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="15" name="MovieCollection">
+    <ConfigurationVersion majorVersion="4" minorVersion="0"/>
+    <CreatedAt>1430367030797</CreatedAt>
+    <CreatedBy>nicole.cranon@ucdenver.edu</CreatedBy>
+    <Description>Contains a collection of movies, their titles, and three actors from the film.</Description>
+    <DisplayName>MovieCollection</DisplayName>
+    <LastModifiedAt>1430367335839</LastModifiedAt>
+    <LastModifiedBy>nicole.cranon@ucdenver.edu</LastModifiedBy>
+    <Policies>
+        <Policy>Bad-Data</Policy>
+        <Policy>Bad-Url</Policy>
+        <Policy>Extract-Movie</Policy>
+        <Policy>Extract-Review</Policy>
+        <Policy>ExtractReviewQ</Policy>
+        <Policy>MergeReviewsWithMovies</Policy>
+        <Policy>SC-Get-Reviews</Policy>
+        <Policy>Unsupported-Method</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources/>
+    <TargetServers/>
+    <TargetEndpoints>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+    <validate>false</validate>
+</APIProxy>

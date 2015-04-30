@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+    <Description/>
+    <PreFlow name="PreFlow">
+        <Request>
+            <Step>
+                <FaultRules/>
+                <Name>Bad-Url</Name>
+                <Condition>(proxy.pathsuffix != &quot;/movies&quot;) and (proxy.pathsuffix != &quot;/moviereviews&quot;) and (proxy.pathsuffix !MatchesPath &quot;/movies/{id}&quot;) and (proxy.pathsuffix !MatchesPath &quot;/moviereviews/{id}&quot;)</Condition>
+            </Step>
+            <Step>
+                <FaultRules/>
+                <Name>Extract-Movie</Name>
+                <Condition>((request.verb = &quot;POST&quot;) and (proxy.pathsuffix MatchesPath &quot;/movies&quot;)) or ((request.verb = &quot;PUT&quot;) and (proxy.pathsuffix MatchesPath &quot;/movies/{id}&quot;))</Condition>
+            </Step>
+            <Step>
+                <FaultRules/>
+                <Name>Bad-Data</Name>
+                <Condition>((request.verb = &quot;POST&quot;) and (proxy.pathsuffix MatchesPath &quot;/movies&quot;)) or ((request.verb = &quot;PUT&quot;) and (proxy.pathsuffix MatchesPath &quot;/movies/{id}&quot;)) and ((type = NULL) or (type != "movies") or (title = NULL) or (yearReleased = NULL) or (actors = NULL))</Condition>
+            </Step>
+            <Step>
+                <FaultRules/>
+                <Name>Extract-Review</Name>
+                <Condition>((request.verb = &quot;POST&quot;) and (proxy.pathsuffix MatchesPath &quot;/moviereviews&quot;)) or ((request.verb = &quot;PUT&quot;) and (proxy.pathsuffix MatchesPath &quot;/moviereviews/{id}&quot;))</Condition>
+            </Step>
+            <Step>
+                <FaultRules/>
+                <Name>Bad-Data</Name>
+                <Condition>((request.verb = &quot;POST&quot;) and (proxy.pathsuffix MatchesPath &quot;/moviereviews&quot;)) or ((request.verb = &quot;PUT&quot;) and (proxy.pathsuffix MatchesPath &quot;/moviereviews/{id}&quot;)) and ((mtype = NULL) or (mtype != "moviereviews") or (movieId = null) or (reviewer = NULL) or (comment = NULL) or (rating = NULL) or (!(rating ~~ ("[1-4][.]?[1-9]?")) and !(rating ~~ ("[5]")))</Condition>
+            </Step>
+            <Step>
+                <FaultRules/>
+                <Name>ExtractReviewQ</Name>
+                <Condition>proxy.pathsuffix MatchesPath &quot;/movies/{id}&quot; or proxy.pathsuffix MatchesPath &quot;/movies&quot;</Condition>
+            </Step>
+            <Step>
+                <FaultRules/>
+                <Name>SC-Get-Reviews</Name>
+                <Condition>(proxy.pathsuffix MatchesPath &quot;/movies/{id}&quot; or proxy.pathsuffix MatchesPath &quot;/movies&quot;) and (reviews = true)</Condition>
+            </Step>
+        </Request>
+        <Response>
+            <Step>
+                <FaultRules/>
+                <Name>MergeReviewsWithMovies</Name>
+                <Condition>(proxy.pathsuffix MatchesPath &quot;/movies/{id}&quot; or proxy.pathsuffix MatchesPath &quot;/movies&quot;) and (reviews = true)</Condition>
+            </Step>
+        </Response>
+    </PreFlow>
+    <Flows>
+        <Flow name="Get Movies">
+            <Description/>
+            <Request/>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath &quot;/movies&quot;) and (request.verb = &quot;GET&quot;)</Condition>
+        </Flow>
+        <Flow name="Get Movie">
+            <Description/>
+            <Request/>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath &quot;/movies/{id}&quot;) and (request.verb = &quot;GET&quot;)</Condition>
+        </Flow>
+        <Flow name="Add Movie">
+            <Description/>
+            <Request/>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath &quot;/movies&quot;) and (request.verb = &quot;POST&quot;)</Condition>
+        </Flow>
+        <Flow name="Update Movie">
+            <Description/>
+            <Request/>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath &quot;/movies/{id}&quot;) and (request.verb = &quot;PUT&quot;)</Condition>
+        </Flow>
+        <Flow name="Delete Movie">
+            <Description/>
+            <Request/>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath &quot;/movies/{id}&quot;) and (request.verb = &quot;DELETE&quot;)</Condition>
+        </Flow>
+        <Flow name="Get Reviews">
+            <Description/>
+            <Request/>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath &quot;/moviereviews&quot;) and (request.verb = &quot;GET&quot;)</Condition>
+        </Flow>
+        <Flow name="Get Review">
+            <Description/>
+            <Request/>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath &quot;/moviereviews/{id}&quot;) and (request.verb = &quot;GET&quot;)</Condition>
+        </Flow>
+        <Flow name="Add Review">
+            <Description/>
+            <Request/>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath &quot;/moviereviews&quot;) and (request.verb = &quot;POST&quot;)</Condition>
+        </Flow>
+        <Flow name="Update Review">
+            <Description/>
+            <Request/>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath &quot;/moviereviews/{id}&quot;) and (request.verb = &quot;PUT&quot;)</Condition>
+        </Flow>
+        <Flow name="Delete Review">
+            <Description/>
+            <Request/>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath &quot;/moviereviews/{id}&quot;) and (request.verb = &quot;DELETE&quot;)</Condition>
+        </Flow>
+    </Flows>
+    <PostFlow name="PostFlow">
+        <Request/>
+        <Response/>
+    </PostFlow>
+    <HTTPProxyConnection>
+        <BasePath>/mc</BasePath>
+        <VirtualHost>default</VirtualHost>
+        <VirtualHost>secure</VirtualHost>
+    </HTTPProxyConnection>
+    <RouteRule name="default">
+        <TargetEndpoint>default</TargetEndpoint>
+    </RouteRule>
+</ProxyEndpoint>
