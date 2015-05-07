@@ -31,6 +31,6 @@ app.use('/payment', pay)
 //Used as callback to send auth. Extracts data from the authorization if it is approved
 //Stores the extracted data for later access
 function extractData(authCode){
-	transData = extract(auth_object, items_object, authCode);
-	store(transData);
+  transData = extract(auth_object, items_object, authCode);
+  store(transData);
 }
