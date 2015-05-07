@@ -7,8 +7,8 @@ function storeTransactionData(transactionData){
 	if (transactionData != null) {
 
 		var dataClient = new usergrid.client({
-		    orgName:'ncranon',
-		    appName:'sandbox'
+			orgName:'ncranon',
+			appName:'sandbox'
 		});
 
 		dataClient.createEntity(transactionData);
