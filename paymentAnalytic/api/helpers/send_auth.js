@@ -32,10 +32,9 @@ function send_auth(auth_object, extractData, response){
 			console.log ('\nAuthorize Response:\n', j);
 			//If the response has an authorization code and reference number, then lets send a capture
 			if(j.AuthorizeResponse != null && j.AuthorizeResponse.AuthorizationCode && j.AuthorizeResponse.ReferenceNumber){
-				//call a capture
 				authCode = j.AuthorizeResponse.AuthorizationCode;
 				var refNum = j.AuthorizeResponse.ReferenceNumber;
-				if (extractData != null)	// check that extract data was passed
+				if (extractData != null)	// check that extract data function was passed
         	extractData(authCode);
 			}
 
